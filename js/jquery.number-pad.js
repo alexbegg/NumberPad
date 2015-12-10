@@ -9,6 +9,7 @@
             columns: 3,
             extraRow: {
                 items: ['0'],
+                expand: 'first',
                 position: 'bottom'
             },
             inputElement: null,
@@ -50,7 +51,8 @@
             var $input = $(settings.inputElement),
                 $container = $(this),
                 $keysCollection = $([]),
-                $zero;
+                extraExpand = settings.extraRow.expand,
+                extraLast = extraItemsCount-1;
             if (!$input.is('input')) {
                 if ($(this).is('input')) {
                     $input = $(this);
@@ -69,9 +71,24 @@
 
             if (settings.extraRow.position == "top") {
                 $.each(settings.extraRow.items, function(index, val) {
-                    $extra = addKey(val).css({
-                        'width': extrasWidth + '%'
-                    });
+                    var $extra = addKey(val);
+                    if (extraItemsCount % 2 != settings.columns % 2 &&
+                            (extraExpand == "first" || extraExpand == "last")) {
+                        if ((index == 0 && extraExpand == "first") ||
+                                (index == extraLast && extraExpand == "last")) {
+                            $extra.css({
+                                'width': (columnPercent * 2) + '%'
+                            });
+                        } else {
+                            $extra.css({
+                                'width': columnPercent + '%'
+                            });
+                        }
+                    } else {
+                        $extra.css({
+                            'width': extrasWidth + '%'
+                        });
+                    }
                     $keysCollection = $keysCollection.add($extra);
                 });
             }
@@ -108,9 +125,24 @@
             }
             if (settings.extraRow.position == "bottom") {
                 $.each(settings.extraRow.items, function(index, val) {
-                    $extra = addKey(val).css({
-                        'width': extrasWidth + '%'
-                    });
+                    var $extra = addKey(val);
+                    if (extraItemsCount % 2 != settings.columns % 2 &&
+                            (extraExpand == "first" || extraExpand == "last")) {
+                        if ((index == 0 && extraExpand == "first") ||
+                                (index == extraLast && extraExpand == "last")) {
+                            $extra.css({
+                                'width': (columnPercent * 2) + '%'
+                            });
+                        } else {
+                            $extra.css({
+                                'width': columnPercent + '%'
+                            });
+                        }
+                    } else {
+                        $extra.css({
+                            'width': extrasWidth + '%'
+                        });
+                    }
                     $keysCollection = $keysCollection.add($extra);
                 });
             }
