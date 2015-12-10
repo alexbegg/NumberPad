@@ -32,13 +32,11 @@
         <input type="number" class="number_input" readonly>
         <div class="numberpad"></div>
 
-        <div class="with_decimal">
-            <input type="text" readonly>
-        </div>
+        <input type="text" class="with_decimal" readonly>
 
-        <div class="as_phone">
-            <input type="tel" readonly>
-        </div>
+        <input type="tel" class="as_phone" readonly>
+
+        <input type="number" class="larger_numbers">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
@@ -48,13 +46,19 @@
             $(function() {
 
                 $('.numberpad').numberPad({
+                    extraRow: {
+                        items: ['0']
+                    },
                     inputElement: 'input.number_input'
                 });
+
+                $('.numberpad').trigger('numberPadPress', 2);
 
                 $('.with_decimal').numberPad({
                     calculatorOrder: true,
                     extraRow: {
-                        items: ['0', '.']
+                        items: ['0', '.'],
+                        expand: 'first'
                     }
                 });
 
@@ -62,6 +66,11 @@
                     extraRow: {
                         items: ['*', '0', '#']
                     }
+                });
+
+                $('.larger_numbers').numberPad({
+                    start: 30,
+                    end: 41
                 });
 
             });
