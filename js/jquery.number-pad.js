@@ -47,12 +47,35 @@
             extrasWidth = round(extrasWidth, 4);
         }
 
+        var extraExpand = settings.extraRow.expand,
+            extraLast = extraItemsCount-1;
+
+        function addExtra(index, val) {
+            var $extra = addKey(val);
+            if (extraItemsCount % 2 != settings.columns % 2 &&
+                    (extraExpand == "first" || extraExpand == "last")) {
+                if ((index == 0 && extraExpand == "first") ||
+                        (index == extraLast && extraExpand == "last")) {
+                    $extra.css({
+                        'width': (columnPercent * 2) + '%'
+                    });
+                } else {
+                    $extra.css({
+                        'width': columnPercent + '%'
+                    });
+                }
+            } else {
+                $extra.css({
+                    'width': extrasWidth + '%'
+                });
+            }
+            return $extra;
+        }
+
         return this.each(function() {
             var $input = $(settings.inputElement),
                 $container = $(this),
-                $keysCollection = $([]),
-                extraExpand = settings.extraRow.expand,
-                extraLast = extraItemsCount-1;
+                $keysCollection = $([]);
             if (!$input.is('input')) {
                 if ($(this).is('input')) {
                     $input = $(this);
@@ -71,24 +94,7 @@
 
             if (settings.extraRow.position == "top") {
                 $.each(settings.extraRow.items, function(index, val) {
-                    var $extra = addKey(val);
-                    if (extraItemsCount % 2 != settings.columns % 2 &&
-                            (extraExpand == "first" || extraExpand == "last")) {
-                        if ((index == 0 && extraExpand == "first") ||
-                                (index == extraLast && extraExpand == "last")) {
-                            $extra.css({
-                                'width': (columnPercent * 2) + '%'
-                            });
-                        } else {
-                            $extra.css({
-                                'width': columnPercent + '%'
-                            });
-                        }
-                    } else {
-                        $extra.css({
-                            'width': extrasWidth + '%'
-                        });
-                    }
+                    $extra = addExtra(index, val);
                     $keysCollection = $keysCollection.add($extra);
                 });
             }
@@ -125,24 +131,7 @@
             }
             if (settings.extraRow.position == "bottom") {
                 $.each(settings.extraRow.items, function(index, val) {
-                    var $extra = addKey(val);
-                    if (extraItemsCount % 2 != settings.columns % 2 &&
-                            (extraExpand == "first" || extraExpand == "last")) {
-                        if ((index == 0 && extraExpand == "first") ||
-                                (index == extraLast && extraExpand == "last")) {
-                            $extra.css({
-                                'width': (columnPercent * 2) + '%'
-                            });
-                        } else {
-                            $extra.css({
-                                'width': columnPercent + '%'
-                            });
-                        }
-                    } else {
-                        $extra.css({
-                            'width': extrasWidth + '%'
-                        });
-                    }
+                    $extra = addExtra(index, val);
                     $keysCollection = $keysCollection.add($extra);
                 });
             }
