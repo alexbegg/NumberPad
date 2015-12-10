@@ -2,7 +2,7 @@
 
     $.fn.numberPad = function(options) {
 
-        var settings = $.extend({
+        var defaults = {
             start: 1,
             end: 9,
             calculatorOrder: false,
@@ -15,7 +15,9 @@
             inputElement: null,
             keyClass: 'numberpad-key',
             onSelect: null
-        }, options);
+        };
+
+        var settings = $.extend(true, {}, defaults, options);
 
         function round(value, decimals) {
             return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
@@ -46,6 +48,8 @@
             }
             extrasWidth = round(extrasWidth, 4);
         }
+
+        console.log(settings.extraRow);
 
         var extraExpand = settings.extraRow.expand,
             extraLast = extraItemsCount-1;
@@ -82,7 +86,7 @@
                 } else if ($(this).find('input').length) {
                     $input = $(this).find('input');
                 } else {
-                    $input = $('<input type="text">').insertAfter(this);
+                    $input = $('<input type="text">').insertBefore(this);
                 }
             }
             if ($(this).is('input')) {
@@ -137,6 +141,7 @@
             }
 
             $container.append($keysCollection);
+            $container.append('<div style="clear: both;" />');
 
             $keysCollection.click(function(event) {
                 event.preventDefault();
