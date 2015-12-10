@@ -49,8 +49,6 @@
             extrasWidth = round(extrasWidth, 4);
         }
 
-        console.log(settings.extraRow);
-
         var extraExpand = settings.extraRow.expand,
             extraLast = extraItemsCount-1;
 
