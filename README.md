@@ -58,17 +58,17 @@ $('.numberpad').numberPad({
 
 
 $('.numberpad').numberPad({
-    start: 1, // Stating number (To switch the order make this larger than 'end')
-    end: 9, // Ending number (To switch the order make this smaller than 'start')
+    start: 1,               // Stating number (To switch the order make this larger than 'end')
+    end: 9,                 // Ending number (To switch the order make this smaller than 'start')
     calculatorOrder: false, // Layout the numbers like a calculator (789/456/123) (Order of 'start' and 'end' does not matter in this mode)
-    columns: 3, // Number of buttons across
+    columns: 3,             // Number of buttons across
     extraRow: {
         position: 'bottom', // Place extra row at the 'top' or 'bottom'
-        items: [], // Object containing items to place in the extra row, example: ['*', '0', '#']
-        expand: false // Expand the 'first' or 'last' button to be twice as wide as a number button, if needed for layout purposes
+        items: [],          // Object containing items to place in the extra row, example: ['*', '0', '#']
+        expand: false       // Expand the 'first' or 'last' button to be twice as wide as a number button, if needed for layout purposes
     },
-    inputElement: null, // Input to receive the numbers
-    keyClass: '', // Add a class to each button on the number pad
-    onPress: function($input, event) {} // Callback function for when you press a button on the number pad
+    inputElement: null,     // Input to receive the numbers
+    keyClass: '',           // Add a class to each button on the number pad
+    onPress: function($input, event) {} // Callback function triggered when you press a button on the number pad
 });
 ```

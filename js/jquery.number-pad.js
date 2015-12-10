@@ -14,7 +14,7 @@
             },
             inputElement: null,     // Input to receive the numbers
             keyClass: '',           // Add a class to each button on the number pad
-            onPress: function($input, event) {} // Callback function for when you press a button on the number pad
+            onPress: function($input, event) {} // Callback function triggered when you press a button on the number pad
         };
 
         var settings = $.extend(true, {}, defaults, options);
