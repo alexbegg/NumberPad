@@ -1,23 +1,30 @@
+/*!
+ * jQuery Number Pad
+ * Version 0.6
+ *
+ * Copyright 2015, MedMen
+ * https://medmen.com
+ *
+ * https://github.com/mmmg/jquery-numberpad
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 (function($) {
 
     $.fn.numberPad = function(options) {
 
-        var defaults = {
-            start: 1,               // Stating number (To switch the order make this larger than 'end')
-            end: 9,                 // Ending number (To switch the order make this smaller than 'start')
-            calculatorOrder: false, // Layout the numbers like a calculator (789/456/123) (Order of 'start' and 'end' does not matter in this mode)
-            columns: 3,             // Number of buttons across
-            extraRow: {
-                position: 'bottom', // Place extra row at the 'top' or 'bottom'
-                items: [],          // Object containing items to place in the extra row, example: ['*', '0', '#']
-                expand: false       // Expand the 'first' or 'last' button to be twice as wide as a number button, if needed for layout purposes
-            },
-            inputElement: null,     // Input to receive the numbers
-            keyClass: '',           // Add a class to each button on the number pad
-            onPress: function($input, event) {} // Callback function triggered when you press a button on the number pad
-        };
-
-        var settings = $.extend(true, {}, defaults, options);
+        var settings = $.extend(true, {}, $.fn.numberPad.defaults, options);
 
         function round(value, decimals) {
             return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
@@ -168,6 +175,21 @@
 
         });
 
+    };
+
+    $.fn.numberPad.defaults = {
+        start: 1,               // Stating number (To switch the order make this larger than 'end')
+        end: 9,                 // Ending number (To switch the order make this smaller than 'start')
+        calculatorOrder: false, // Layout the numbers like a calculator (789/456/123) (Order of 'start' and 'end' does not matter in this mode)
+        columns: 3,             // Number of buttons across
+        extraRow: {
+            position: 'bottom', // Place extra row at the 'top' or 'bottom'
+            items: [],          // Object containing items to place in the extra row, example: ['*', '0', '#']
+            expand: false       // Expand the 'first' or 'last' button to be twice as wide as a number button, if needed for layout purposes
+        },
+        inputElement: null,     // Input to receive the numbers
+        keyClass: '',           // Add a class to each button on the number pad
+        onPress: function($input, event) {} // Callback function triggered when you press a button on the number pad
     };
 
 }(jQuery));
