@@ -170,7 +170,12 @@
             $container.on('click', '.'+keyPass, function(event) {
                 event.preventDefault();
                 var text = $(this).text();
-                $(el).trigger('numberPadPress', text);
+                if (typeof settings.beforeAdd === "function"){
+                    var beforeAdd = settings.beforeAdd.call(this, $input, text, event)
+                }
+                if(beforeAdd){
+                    $(el).trigger('numberPadPress', text);
+                }
             });
 
         });
@@ -189,7 +194,8 @@
         },
         inputElement: null,     // Input to receive the numbers
         keyClass: '',           // Add a class to each button on the number pad
-        onPress: function($input, event) {} // Callback function triggered when you press a button on the number pad
+        onPress: function($input, event) {}, // Callback function triggered when you press a button on the number pad
+        beforeAdd: function($input, text, event) {return true;} // Callback function triggered before adding to the input field
     };
 
 }(jQuery));
