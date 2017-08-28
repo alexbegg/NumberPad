@@ -167,7 +167,7 @@
             });
 
             var el = this;
-            $container.on('click', '.'+keyPass, function(event) {
+            $container.on(settings.event, '.'+keyPass, function(event) {
                 event.preventDefault();
                 var text = $(this).text();
                 if (typeof settings.beforeAdd === "function"){
@@ -183,6 +183,7 @@
     };
 
     $.fn.numberPad.defaults = {
+        event: 'click',         // The type of event that the number keys should react to in order to enter the number
         start: 1,               // Stating number (To switch the order make this larger than 'end')
         end: 9,                 // Ending number (To switch the order make this smaller than 'start')
         calculatorOrder: false, // Layout the numbers like a calculator (789/456/123) (Order of 'start' and 'end' does not matter in this mode)
